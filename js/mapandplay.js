@@ -1,36 +1,5 @@
 var canvas = document.getElementById('mycanvas'); //Crates the canvas
 
-//Lists for all the images, their tyoe and their URLs
-var acc = [];
-var lengthAcc = 10;
-for (let i = 0; i < lengthAcc; i++) {
-	acc.push("./images/acc/acc" + i + ".png");
-}
-
-var floor = [];
-var lengthFloor = 14;
-for (let i = 0; i < lengthFloor; i++) {
-	floor.push("./images/floor/floor" + i + ".png");
-}
-
-var hole = [];
-var lengthHole = 14;
-for (let i = 0; i < lengthHole; i++) {
-	hole.push("./images/hole/hole" + i + ".png");
-}
-
-var wall = [];
-var lengthWall = 11;
-for (let i = 0; i < lengthWall; i++) {
-	wall.push("./images/wall/wall" + i + ".png");
-}
-
-var char = [];
-var lengthChar = 14;
-for (let i = 0; i < lengthChar; i++) {
-	char.push("./images/char/char" + i + ".png");
-}
-
 var charList = ["THIEF", "PALADIN", "BARTENDER", "MAID", "BEGGAR", "BLACKSMITH", "FORTUNE TELLER", "BUFFON", "KING", "ALCHEMIST", "BARD", "ASSASSIN", "CLEANER", "DRUNKARD"];
 
 var charDropped = 0; //Total number of character in the "Character Sheet"
