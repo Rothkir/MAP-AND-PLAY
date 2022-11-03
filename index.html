@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="./css/mapandplay.css">
+	<script src="./js/mapandplay.js" defer></script>
+	<script src="./js/html2canvas.js"></script>
+	<!--Could use the internet link, but then won't work in local (When no internet connexion)-->
+</head>
+
+<body>
+	<table>
+		<tr class="head">
+			<td class="vertalignb" colspan="5">
+				<h1>Tiles</h1>
+			</td>
+			<td class="vertalignb">
+				<div class="card">
+					<header>
+						<h1>Map and Play</h1>
+						<div>
+							<button class="button-as-link" onclick="clearCanvas()">Clear Canvas</button>
+							<button class="primary-button" onclick="exportImage()">Export Image</button>
+						</div>
+					</header>
+				</div>
+			</td>
+			<td class="vertalignb" colspan="2">
+				<h1>Character sheets</h1>
+			</td>
+			<td>
+				<button id='download' class="primary-button" onclick="exportCharSheet()">Download Sheet</button>
+			</td>
+		</tr>
+		<tr>
+			<script src="./js/button_generate.js"></script>
+			<td class="vertalignt">
+				<div class="card">
+					<div class="card_body">
+						<div class="card_right-column">
+							<div class="centercanvas">
+								<canvas id="mycanvas" width="480" height="480"></canvas>
+							</div>
+							<p class="instructions">
+								<strong>Click</strong> to place.
+								<strong>Shift + Click</strong> to remove.
+							</p>
+							<div>
+								<label>Editing Layer:</label>
+								<ul class="layers">
+									<li>
+										<button onclick="setLayer(2)" class="layer" tile-layer="2">Top Layer</button>
+									</li>
+									<li>
+										<button onclick="setLayer(1)" class="layer" tile-layer="1">Middle Layer</button>
+									</li>
+									<li>
+										<button onclick="setLayer(0)" class="layer" tile-layer="0">Bottom Layer</button>
+									</li>
+								</ul>
+							</div>
+							<br>
+							<table class="sizetable">
+								<tr>
+									<td>
+										<div class="sizes">
+											<label>Width</label>
+											<select id="canvasX">
+												<option value="320">
+													320
+												</option>
+												<option value="480" selected>
+													480
+												</option>
+												<option value="640">
+													640
+												</option>
+											</select>
+										</div>
+									</td>
+									<td>
+										<div class="sizes">
+											<label>Height</label>
+											<select id="canvasY">
+												<option value="320">
+													320
+												</option>
+												<option value="480" selected>
+													480
+												</option>
+												<option value="640">
+													640
+												</option>
+											</select>
+										</div>
+									</td>
+									<td>
+										<button class="dropbtn" onclick="setSize()">Apply</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td class='vertalignt' colspan="3">
+				<div id="exportchar">
+					<table class='chartable' id="charsheet">
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>
