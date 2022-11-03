@@ -32,15 +32,15 @@ var y = 0
 
 var names_string = ["Floor", "Wall", "Holes", "Acc", "Char"]
 
-var names_var = [floor, wall, hole, acc, char]
+var names_list = [floor, wall, hole, acc, char]
 
 function createButton(x) {
-   document.write("<td id='centerbutton' class='vertalignt'><button onclick='dropdown(" + x + ")' class='dropbtn'>" + names_string[x] + "</button><div id='Dropdown" + x + "' class='dropdown-content'>")
-   for (let i = 0; i < names_var[x].length; i++) {
-      document.write("<button onclick='chooseTile(" + y + ")'><img id = 'img" + y + "' src = '" + names_var[x][i] + "'></button>")
+   document.write("<td class='vertalignt'><button onclick='dropdown(" + x + ")' class='dropbtn'>" + names_string[x] + "</button><div id='Dropdown" + x + "' class='dropdown-content'>")
+   for (let i = 0; i < names_list[x].length; i++) {
+      document.write("<button onclick='chooseTile(" + y + ")'><img id = 'img" + y + "' src = '" + names_list[x][i] + "'></button>")
       y++
    }
-   document.write("</td></div><br><br>")
+   document.write("</td></div>")
 }
 
 for (let i = 0; i < names_string.length; i++) {

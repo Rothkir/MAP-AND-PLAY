@@ -17,7 +17,8 @@ var layers = [
 	{
 		//Structure is "x-y": ["url of desired image"]
 		//EXAMPLE: "1-1": ["./images/whatever.png"]
-	}, {}, //Middle
+	}, 
+	{}, //Middle
 	{} //Top
 ];
 
