@@ -1,4 +1,4 @@
-var canvas = document.getElementById('mycanvas'); //Crates the canvas
+var canvas = document.getElementById('mycanvas'); //Creates the canvas
 
 var charList = ["THIEF", "PALADIN", "BARTENDER", "MAID", "BEGGAR", "BLACKSMITH", "FORTUNE TELLER", "BUFFON", "KING", "ALCHEMIST", "BARD", "ASSASSIN", "CLEANER", "DRUNKARD"];
 
