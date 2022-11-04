@@ -164,10 +164,10 @@ function exportCharSheet() {
 	if (document.getElementById("charsheet").innerHTML != "") {
 		html2canvas(element).then(canvas => {
 			var imgData = canvas.toDataURL("image/jpeg", 1.0);
-  		var pdf = new jsPDF();
+  			var pdf = new jsPDF();
 
-  		pdf.addImage(imgData, 'JPEG', 0, 0);
-  		pdf.save("sheet.pdf");
+  			pdf.addImage(imgData, 'JPEG', 0, 0);
+  			pdf.save("sheet.pdf");
 		});
 	}
 }
