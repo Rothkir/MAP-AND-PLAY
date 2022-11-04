@@ -151,9 +151,7 @@ canvas.addEventListener("mousemove", (event) => {
 
 //Utility for getting coordinates of mouse click
 function getCoords(e) {
-	const {
-		x, y
-	} = e.target.getBoundingClientRect();
+	const { x, y } = e.target.getBoundingClientRect();
 	const mouseX = e.clientX - x;
 	const mouseY = e.clientY - y;
 	return [Math.floor(mouseX / 32), Math.floor(mouseY / 32)]; //Divides by 32, to make round coord to place on canvas
@@ -233,7 +231,6 @@ function draw() {
 
 //Initializes the app
 window.onload = function() {
-	selection = '';
 	resetCharNum();
 	draw();
 	setLayer(0);
