@@ -75,7 +75,6 @@ function drawChar(num, key) {
 
 		image.innerHTML = "<img src='./images/char/char" + String(num) + ".png'>";
 
-
 		stats.innerHTML = "<p><input type='text' id = 'name" + String(key) + "' size = '20' value = '" + String(charList[num]) + "'></input> POS: " + String(key) +"</p><p>STR: <input type='text' id = 'str" + String(key) + "'size='2'></input> CON: <input type='text' id='con" + String(key) + "' size='2'></input> DEX: <input type='text' id = 'dex" + String(key) + "' size='2'></input><br> INT: <input type='text' id = 'int" + String(key) + "' size='2'></input> WIS: <input type='text' id = 'wis" + String(key) + "' size='2'></input> CHA: <input type='text' id = 'cha" + String(key) + "' size='2'></input></p>";
 	}
 }
@@ -94,26 +93,21 @@ function removeChar(key) {
 
 //Handler for placing new tiles on the map
 function addTile(mouseEvent) {
-	if (selection != '') { //If user clicks on the canvas, while having nothing selected, nothing happens and doesn't create bugs...
+	if (selection != '') {
 		var clickedNow = getCoords(event);
 		if (clickedNow)
 			var key = clickedNow[0] + "-" + clickedNow[1];
-		if (mouseEvent.shiftKey) { //Shift is used when user wants to delete a tile
+		if (mouseEvent.shiftKey) {
 			if (String(layers[currentLayer][key]).includes("char")) {
-				console.log(layers[currentLayer])
 				removeChar(key);
 			}
 			delete layers[currentLayer][key];
 		} else {
 			if (selection.includes("char")) { 
 				flag = false;
-				for (let i = 0; i < layers.length; i++) {  //Check to see if any other character tiles are placed on the same key but different layer to avoid bug
-					if (Object.keys(layers[i]).length !== 0) {
-						if (layers[i].hasOwnProperty(key) == true) {
-							if (layers[i][key] == selection) {
-								flag = true;
-							}
-						}
+				for (let i = 0; i < layers.length; i++) {
+					if (Object.keys(layers[i]).length !== 0 && layers[i].hasOwnProperty(key) == true && layers[i][key][0].includes("char")) {
+						flag = true;
 					}
 				}
 				if (flag == false) {
@@ -124,12 +118,9 @@ function addTile(mouseEvent) {
 			} else {
 				layers[currentLayer][key] = [selection];
 			}
-			
 		}		
 	}
-	console.log(layers);
 	draw();
-
 }
 
 //Bind mouse events for painting (or removing) tiles on click/drag
@@ -159,13 +150,12 @@ function getCoords(e) {
 
 
 //converts data to image to show it in a new browser tab
-function exportImage() {
-	var dataURL = canvas.toDataURL();
-	var image = new Image();
-	image.src = dataURL;
+function exportImage() { 
+	var imgData = canvas.toDataURL("image/jpeg", 1.0);
+  	var pdf = new jsPDF();
 
-	var newWindow = window.open("", "_blank");
-	newWindow.document.write(image.outerHTML);
+  	pdf.addImage(imgData, 'JPEG', 0, 0);
+  	pdf.save("map.pdf");
 }
 
 
@@ -173,13 +163,13 @@ function exportCharSheet() {
 	var element = document.getElementById("exportchar");
 	if (document.getElementById("charsheet").innerHTML != "") {
 		html2canvas(element).then(canvas => {
-			var imageURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-	
-			window.location.href = imageURL;
+			var imgData = canvas.toDataURL("image/jpeg", 1.0);
+  		var pdf = new jsPDF();
+
+  		pdf.addImage(imgData, 'JPEG', 0, 0);
+  		pdf.save("sheet.pdf");
 		});
 	}
-	
-	
 }
 
 //Resets diffrent variables
@@ -187,7 +177,7 @@ function clearCanvas() {
 	layers = [{}, {}, {}];
 	charDropped = 0;
 	resetCharNum(); //Removes all characters
-	draw(); //For resseting the canvas and actually showing the user
+	draw(); //For reseting the canvas and actually showing the user
 }
 
 function setLayer(newLayer) {
@@ -226,7 +216,6 @@ function draw() {
 			ctx.drawImage(tilesetImage, positionX * 32, positionY * 32, 32, 32); //PositionX and positionY are multiplied by 32 to put them accurately on the board
 		});
 	}
-
 }
 
 //Initializes the app
