@@ -127,13 +127,17 @@ function addTile(mouseEvent) {
 canvas.addEventListener("mousedown", () => {
 	isMouseDown = true;
 });
+
 canvas.addEventListener("mouseup", () => {
 	isMouseDown = false;
 });
+
 canvas.addEventListener("mouseleave", () => {
 	isMouseDown = false;
 });
+
 canvas.addEventListener("mousedown", addTile);
+
 canvas.addEventListener("mousemove", (event) => {
 	if (isMouseDown) {
 		addTile(event);
@@ -153,11 +157,9 @@ function getCoords(e) {
 function exportImage() { 
 	var imgData = canvas.toDataURL("image/jpeg", 1.0);
   	var pdf = new jsPDF();
-
   	pdf.addImage(imgData, 'JPEG', 0, 0);
   	pdf.save("map.pdf");
 }
-
 
 function exportCharSheet() {
 	var element = document.getElementById("exportchar");
@@ -165,7 +167,6 @@ function exportCharSheet() {
 		html2canvas(element).then(canvas => {
 			var imgData = canvas.toDataURL("image/jpeg", 1.0);
   			var pdf = new jsPDF();
-
   			pdf.addImage(imgData, 'JPEG', 0, 0);
   			pdf.save("sheet.pdf");
 		});
