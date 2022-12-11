@@ -116,9 +116,47 @@ function addTile(mouseEvent) {
 					layers[currentLayer][key] = [selection];
 				}
 			} else {
+				if (String(layers[currentLayer][key]).includes("char")) { // TALK ABOUT BUG
+					removeChar(key);
+				}
 				layers[currentLayer][key] = [selection];
 			}
 		}		
+	}
+	draw();
+}
+
+function randomFill() {
+	resetCharNum();
+	count = 0;
+	layers = [ {}, {}, {} ];
+	widthToFill = canvas.width / 32
+	heightToFill = canvas.height / 32
+
+	for (let i = 0; i < widthToFill; i++) {
+		for (let j = 0; j < heightToFill; j++) {
+			var value = Math.floor(Math.random() * 63);
+			var key = String(i) + "-" + String(j);
+
+			if (i == 0 && j == 0) {
+				value = 0;
+			} else if (i == widthToFill - 1 && j == 0){
+				value = 2;
+			} else if (i == 0 && j == heightToFill - 1) {
+				value = 6;
+			} else if (i == widthToFill - 1 && j == heightToFill - 1) {
+				value = 8;
+			}
+			if (value >= 49 && count < 6) {
+				count += 1
+				drawChar(value - 49, key);
+			} else if (value >= 49 && count >= 6) {
+				value = Math.floor(Math.random() * 49);
+			}
+			console.log(key, value)
+			selection = String(document.getElementById("img" + String(value)).src);
+			layers[currentLayer][key] = [selection];
+		}
 	}
 	draw();
 }
@@ -151,7 +189,6 @@ function getCoords(e) {
 	const mouseY = e.clientY - y;
 	return [Math.floor(mouseX / 32), Math.floor(mouseY / 32)]; //Divides by 32, to make round coord to place on canvas
 }
-
 
 //converts data to image to show it in a new browser tab
 function exportImage() { 
@@ -195,11 +232,11 @@ function setLayer(newLayer) {
 
 //Change the active size of Canvas
 function setSize() {
-	clearCanvas(); //Clears the canvas so there is no bug
 	var width = parseInt(document.getElementById("canvasX").value); //Gets value of both dropdown lists 
 	var height = parseInt(document.getElementById("canvasY").value);
 	canvas.width = width;
 	canvas.height = height;
+	draw();
 }
 
 //Draws on the canvas
